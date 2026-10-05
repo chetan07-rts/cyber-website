@@ -1,0 +1,14 @@
+node_modules/
+**/node_modules/
+dist/
+build/
+coverage/
+
+.env
+.env.*
+!.env.example
+
+backend/uploads/
+
+.DS_Store
+npm-debug.log*

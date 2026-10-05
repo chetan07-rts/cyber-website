@@ -1,0 +1,178 @@
+/* Admin Login */
+.admin-login-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  border-top: 3px solid var(--danger-red);
+}
+
+.text-red {
+  color: var(--danger-red);
+}
+
+/* Dashboard Layout */
+.dashboard-page {
+  display: flex;
+  min-height: calc(100vh - 70px); /* Minus Navbar */
+  background: var(--bg-dark);
+}
+
+.dashboard-sidebar {
+  width: 250px;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 0 1.5rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.sidebar-header h2 {
+  font-size: 1.2rem;
+  color: var(--accent-blue);
+  margin-bottom: 0.2rem;
+}
+
+.admin-email {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.sidebar-nav {
+  list-style: none;
+  flex-grow: 1;
+}
+
+.sidebar-nav li {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  color: var(--text-main);
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav li:hover {
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.sidebar-nav li.active {
+  background: rgba(0, 240, 255, 0.1);
+  border-left-color: var(--accent-blue);
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.logout-btn {
+  margin: 0 1.5rem;
+  font-size: 0.8rem;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+}
+
+/* Data Tables */
+.data-table-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-table th {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.data-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.desc-cell {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-type {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.text-blue {
+  color: var(--accent-blue) !important;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+/* Status Select */
+.status-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.status-select.pending { color: var(--danger-red); }
+.status-select.investigating { color: var(--accent-blue); }
+.status-select.resolved { color: var(--success-green); }
+
+/* Form Grids */
+.form-inline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-inline-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+/* Utils */
+.mx-auto { margin: 0 auto; }

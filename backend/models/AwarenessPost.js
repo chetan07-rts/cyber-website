@@ -1,0 +1,32 @@
+const mongoose = require('mongoose');
+
+const postSchema = mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+    category: {
+      type: String,
+      default: 'Awareness',
+    },
+    imageUrl: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const AwarenessPost = mongoose.model('AwarenessPost', postSchema);
+module.exports = AwarenessPost;

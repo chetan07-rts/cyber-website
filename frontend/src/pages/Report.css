@@ -1,0 +1,76 @@
+.report-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.report-form {
+  border-top: 3px solid var(--danger-red);
+}
+
+.textarea {
+  resize: vertical;
+}
+
+select.select-dark {
+  background-color: #1a1a24;
+  color: var(--text-main);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e2e2e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.select-dark option {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+}
+
+.file-upload-group {
+  position: relative;
+  background: rgba(0, 240, 255, 0.02);
+  border: 1px dashed var(--accent-blue);
+  padding: 1.5rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.file-input {
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.file-info {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.btn-block {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.alert-danger {
+  background: rgba(255, 42, 42, 0.1);
+  color: #ff6b6b;
+  border: 1px solid var(--danger-red);
+}
+
+.alert-success {
+  background: rgba(0, 255, 170, 0.1);
+  color: var(--success-green);
+  border: 1px solid var(--success-green);
+}

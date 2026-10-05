@@ -1,0 +1,55 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "awareness": "Awareness",
+    "contact": "Contact",
+    "track_complaint": "Track Complaint",
+    "report_threat": "Report Threat"
+  },
+  "hero": {
+    "badge": "GOVERNMENT OF INDIA INITIATIVE",
+    "title": "Defending the Digital Frontier",
+    "subtitle": "National Cyber Security Protection Portal. Report cybercrimes, stay informed, and help us build a secure digital infrastructure for all citizens.",
+    "report_btn": "Report Incident",
+    "stay_safe_btn": "Stay Safe"
+  },
+  "footer": {
+    "about_text": "National Cyber Security Protection Portal (NCSPP) is an initiative of the Government of India to facilitate victims/complainants to report cybercrime complaints online.",
+    "quick_links": "Quick Links",
+    "contact_info": "Contact Info",
+    "hq": "📍 Department of Cyber Defense, New Delhi",
+    "toll_free": "📞 Toll Free: 1930",
+    "email": "✉️ support@ncspp.gov.in"
+  },
+  "awareness": {
+    "title": "Cyber Awareness Hub",
+    "subtitle": "Knowledge is your first line of defense. Learn how modern adversaries operate and stay one step ahead.",
+    "common_threats": "Anatomy of Common Threats",
+    "how_to_defend": "How to Defend",
+    "phishing_title": "Phishing & Smishing",
+    "phishing_desc": "Cybercriminals cast a wide net using deceptive emails (Phishing) or SMS texts (Smishing) that mimic trusted entities like your bank, government portals, or delivery services. They create a false sense of urgency, tricking you into clicking malicious links that steal your credentials or install malware.",
+    "phish_tip1": "Never click links in unexpected messages.",
+    "phish_tip2": "Verify the sender's actual email address, not just the display name.",
+    "phish_tip3": "Navigate to websites manually instead of using provided links.",
+    "vishing_title": "Vishing (Voice Phishing)",
+    "vishing_desc": "Attackers call you over the phone, often spoofing the caller ID to look like law enforcement or your financial institution. Using psychological manipulation and fear, they convince you that your account is compromised and demand that you verify your identity by sharing OTPs or transferring funds to a 'safe' account.",
+    "vish_tip1": "Banks and Government officials will never ask for your PIN, Password, or OTP.",
+    "vish_tip2": "If pressured, hang up and call the official number on the back of your card.",
+    "social_title": "Social Engineering & Fraud",
+    "social_desc": "The 'Wolf in Sheep's Clothing'. Attackers gather your personal info from social media to build trust. They may pose as a friend in distress needing emergency funds, or offer fake tech support. The attack targets human psychology rather than technical vulnerabilities.",
+    "social_tip1": "Set your social media profiles to private.",
+    "social_tip2": "Be skeptical of unsolicited offers that sound too good to be true.",
+    "social_tip3": "Always verify the identity of anyone asking for money, even friends.",
+    "live_alerts": "Live Threat Intelligence"
+  },
+  "track": {
+    "title": "Track your Complaint Status",
+    "ack_no": "Acknowledgement No.",
+    "enter_ack": "Enter Acknowledgement No. here...",
+    "get_otp": "Get OTP",
+    "enter_otp": "Enter OTP here...",
+    "enter_captcha": "Enter Captcha",
+    "submit": "Submit"
+  }
+}
