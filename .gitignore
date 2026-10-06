@@ -9,6 +9,7 @@ coverage/
 !.env.example
 
 backend/uploads/
+.vercel/
 
 .DS_Store
 npm-debug.log*

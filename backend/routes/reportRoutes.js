@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
   createReport,
+  getReportEvidence,
   getReports,
   deleteReport,
   updateReportStatus
@@ -12,6 +13,8 @@ const upload = require('../middleware/uploadMiddleware');
 router.route('/')
   .post(upload.single('evidence'), createReport)
   .get(protect, getReports);
+
+router.get('/:id/evidence', protect, getReportEvidence);
 
 router.route('/:id')
   .delete(protect, deleteReport);

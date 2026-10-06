@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { apiUrl } from '../api';
 import './Admin.css';
 
 const AdminDashboard = () => {
@@ -40,10 +41,10 @@ const AdminDashboard = () => {
       };
       
       if (activeTab === 'reports') {
-        const { data } = await axios.get('http://localhost:5000/api/reports', config);
+        const { data } = await axios.get(apiUrl('/api/reports'), config);
         setReports(data);
       } else {
-        const { data } = await axios.get('http://localhost:5000/api/posts', config);
+        const { data } = await axios.get(apiUrl('/api/posts'), config);
         setPosts(data);
       }
     } catch (error) {
@@ -61,11 +62,31 @@ const AdminDashboard = () => {
     navigate('/admin/login');
   };
 
+  const openEvidence = async (id) => {
+    const evidenceWindow = window.open('about:blank', '_blank');
+
+    if (!evidenceWindow) {
+      alert('Allow pop-ups to view report evidence');
+      return;
+    }
+
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${adminInfo.token}` }
+      };
+      const { data } = await axios.get(apiUrl(`/api/reports/${id}/evidence`), config);
+      evidenceWindow.location.href = apiUrl(data.url);
+    } catch (error) {
+      evidenceWindow.close();
+      alert(error.response?.data?.message || 'Error opening evidence');
+    }
+  };
+
   const deleteReport = async (id) => {
     if (window.confirm('Are you sure you want to delete this report?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        await axios.delete(`http://localhost:5000/api/reports/${id}`, config);
+        await axios.delete(apiUrl(`/api/reports/${id}`), config);
         setReports(reports.filter((r) => r._id !== id));
       } catch (error) {
         alert('Error deleting report');
@@ -77,7 +98,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     try {
       const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-      const { data } = await axios.post('http://localhost:5000/api/posts', {
+      const { data } = await axios.post(apiUrl('/api/posts'), {
         title, content, category
       }, config);
       
@@ -94,7 +115,7 @@ const AdminDashboard = () => {
     if (window.confirm('Delete this awareness post?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        await axios.delete(`http://localhost:5000/api/posts/${id}`, config);
+        await axios.delete(apiUrl(`/api/posts/${id}`), config);
         setPosts(posts.filter((p) => p._id !== id));
       } catch (error) {
         alert('Error deleting post');
@@ -105,7 +126,7 @@ const AdminDashboard = () => {
   const updateReportStatus = async (id, status) => {
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        await axios.put(`http://localhost:5000/api/reports/${id}/status`, { status }, config);
+        await axios.put(apiUrl(`/api/reports/${id}/status`), { status }, config);
         setReports(reports.map(r => r._id === id ? { ...r, status } : r));
     } catch (error) {
         alert('Error updating status');
@@ -181,8 +202,8 @@ const AdminDashboard = () => {
                              </select>
                           </td>
                           <td>
-                            {report.evidencePath ? (
-                              <a href={`http://localhost:5000${report.evidencePath}`} target="_blank" rel="noreferrer" className="text-blue">View File</a>
+                            {report.evidencePath || report.evidencePublicId ? (
+                              <button type="button" onClick={() => openEvidence(report._id)} className="btn-icon text-blue">View File</button>
                             ) : 'None'}
                           </td>
                           <td>

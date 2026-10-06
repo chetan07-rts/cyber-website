@@ -1,4 +1,5 @@
 const Report = require('../models/Report');
+const { cloudinary, isConfigured } = require('../config/cloudinary');
 
 // @desc    Create new cybercrime report
 // @route   POST /api/reports
@@ -8,8 +9,17 @@ const createReport = async (req, res) => {
     const { name, email, phone, crimeType, description } = req.body;
 
     let evidencePath = '';
+    let evidencePublicId = '';
+    let evidenceFormat = '';
+    let evidenceResourceType = '';
     if (req.file) {
-      evidencePath = `/uploads/${req.file.filename}`;
+      if (isConfigured) {
+        evidencePublicId = req.file.filename;
+        evidenceFormat = req.file.format;
+        evidenceResourceType = req.file.resourceType;
+      } else {
+        evidencePath = `/uploads/${req.file.filename}`;
+      }
     }
 
     const report = await Report.create({
@@ -19,6 +29,9 @@ const createReport = async (req, res) => {
       crimeType,
       description,
       evidencePath,
+      evidencePublicId,
+      evidenceFormat,
+      evidenceResourceType,
       status: 'Pending',
     });
 
@@ -33,6 +46,40 @@ const createReport = async (req, res) => {
     res.status(201).json(report);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+const getReportEvidence = async (req, res) => {
+  try {
+    const report = await Report.findById(req.params.id);
+
+    if (!report) {
+      return res.status(404).json({ message: 'Report not found' });
+    }
+
+    if (report.evidencePublicId) {
+      const expiresAt = Math.floor(Date.now() / 1000) + 300;
+      const url = cloudinary.utils.private_download_url(
+        report.evidencePublicId,
+        report.evidenceFormat,
+        {
+          type: 'authenticated',
+          resource_type: report.evidenceResourceType,
+          expires_at: expiresAt,
+        }
+      );
+
+      return res.json({ url });
+    }
+
+    if (report.evidencePath) {
+      return res.json({ url: report.evidencePath });
+    }
+
+    res.status(404).json({ message: 'Report has no evidence file' });
+  } catch (error) {
+    console.error('Error retrieving report evidence:', error);
+    res.status(500).json({ message: 'Unable to retrieve report evidence' });
   }
 };
 
@@ -89,6 +136,7 @@ const updateReportStatus = async (req, res) => {
 
 module.exports = {
   createReport,
+  getReportEvidence,
   getReports,
   deleteReport,
   updateReportStatus

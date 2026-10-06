@@ -23,7 +23,16 @@ const reportSchema = mongoose.Schema(
       required: true,
     },
     evidencePath: {
-      type: String, // Path to the uploaded file relative to server
+      type: String,
+    },
+    evidencePublicId: {
+      type: String,
+    },
+    evidenceFormat: {
+      type: String,
+    },
+    evidenceResourceType: {
+      type: String,
     },
     status: {
       type: String,

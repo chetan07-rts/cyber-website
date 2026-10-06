@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../api';
 import './Report.css';
 
 const Report = () => {
@@ -47,7 +48,7 @@ const Report = () => {
         data.append('evidence', evidence);
       }
 
-      await axios.post('http://localhost:5000/api/reports', data, {
+      await axios.post(apiUrl('/api/reports'), data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

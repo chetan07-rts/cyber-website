@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import './Awareness.css';
 
@@ -11,7 +12,7 @@ const Awareness = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/posts');
+        const { data } = await axios.get(apiUrl('/api/posts'));
         if (data && data.length > 0) {
           setPosts(data);
         }

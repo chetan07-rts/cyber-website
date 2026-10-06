@@ -79,9 +79,42 @@ You will also need a running instance of **MongoDB** (either installed locally o
    ```
    *The frontend will run on http://localhost:3000 (or the port Vite issues).*
 
----
+   ## Production Deployment
 
-## Using the System
+   The frontend is deployed to Vercel; the Express API runs as a Render web service. MongoDB Atlas stores application data, and Cloudinary stores uploaded evidence because Render's local filesystem is not persistent. Evidence is uploaded as authenticated Cloudinary media and the admin dashboard requests short-lived download links from the protected API. Use providers and plans appropriate for the sensitivity and retention requirements of submitted reports.
+
+   ### 1. Create the production database and file storage
+
+   1. Create a MongoDB Atlas database and a database user. Configure Atlas network access to allow connections from Render, then copy the database connection string for `MONGO_URI`.
+   2. Create a Cloudinary account and note its cloud name, API key, and API secret. Keep these values private. If you want to allow evidence PDFs to be downloaded on a Cloudinary free account, enable PDF delivery in the product environment's Security settings.
+
+   ### 2. Deploy the frontend to Vercel
+
+   1. In Vercel, import `chetan07-rts/cyber-website` from GitHub.
+   2. Set the project root directory to `frontend`. Vercel detects Vite; use `npm run build` as the build command and `dist` as the output directory.
+   3. Add `VITE_API_URL` as an environment variable with a temporary value such as `https://example.onrender.com`, then deploy. Copy the resulting production URL.
+
+   The Vercel rewrite configuration keeps client-side routes such as `/admin/login` working after refresh.
+
+   ### 3. Deploy the API to Render
+
+   1. In Render, create a new Blueprint and select this GitHub repository. Render reads the root `render.yaml` to configure the API service.
+   2. Enter the Atlas connection string for `MONGO_URI`, the admin email and a unique strong `ADMIN_PASSWORD`, and the Cloudinary cloud name, API key, and API secret.
+   3. Set `FRONTEND_URL` to the production Vercel URL. Render generates `JWT_SECRET` and `INITIAL_ADMIN_SETUP_KEY`.
+   4. Deploy the service and copy its `onrender.com` URL. The `/api/health` endpoint reports whether the API is connected to MongoDB.
+
+   ### 4. Connect the deployments and initialize the admin
+
+   1. In Vercel project settings, set `VITE_API_URL` to the Render service URL (without a trailing slash), then redeploy the frontend.
+   2. After the Render deployment is healthy, send a `POST` request to `https://YOUR-API.onrender.com/api/auth/register-initial` with the header `x-initial-admin-key` set to the generated `INITIAL_ADMIN_SETUP_KEY`.
+   3. After the first admin is created, remove `INITIAL_ADMIN_SETUP_KEY` from the Render service environment and redeploy.
+   4. Test the public pages, report submission and evidence links, then sign in at `/admin/login`.
+
+   For local development, leave `VITE_API_URL` unset: the Vite development server proxies API and upload requests to `http://localhost:5000`.
+
+   ---
+
+   ## Using the System
 
 ### 1. Public Portal
 Navigate to the frontend port in your browser. Citizens can view the Home, About, Awareness, and Contact pages.
